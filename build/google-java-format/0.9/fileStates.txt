@@ -1,0 +1,11 @@
+src/main/java/org/karimbkb/dao/SQLite.java,1619464311733332000,3669,FORMATTED
+src/main/java/org/karimbkb/GuiceModule.java,1619390124873765000,429,FORMATTED
+src/main/java/org/karimbkb/entity/KafkaConfig.java,1619446949553949000,383,FORMATTED
+src/main/java/org/karimbkb/dto/KafkaMessage.java,1619389311413636000,877,FORMATTED
+src/main/java/org/karimbkb/controller/KafkaPilotController.java,1619464311791143000,1906,FORMATTED
+src/main/java/org/karimbkb/model/KafkaManagementModel.java,1619464311810386000,1668,FORMATTED
+src/main/java/org/karimbkb/dao/Database.java,1619464311741909000,346,FORMATTED
+src/main/java/org/karimbkb/controller/KafkaConfigController.java,1619464311756983000,1463,FORMATTED
+src/main/java/org/karimbkb/KafkaPilot.java,1619390124891399000,1178,FORMATTED
+src/main/java/org/karimbkb/model/KafkaManagement.java,1619464311797421000,295,FORMATTED
+src/main/java/org/karimbkb/controller/KafkaManagementController.java,1619464311774327000,1147,FORMATTED
