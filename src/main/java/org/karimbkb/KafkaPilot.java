@@ -8,17 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.karimbkb.controller.KafkaPilotController;
+import org.karimbkb.model.Data;
 
 public class KafkaPilot extends Application {
 
-  private static KafkaPilotController kafkaPilotController = null;
-
-  public static KafkaPilotController getKafkaPilotController() {
-    if (kafkaPilotController == null) {
-      return new KafkaPilotController();
-    }
-    return kafkaPilotController;
-  }
+  public static KafkaPilotController kafkaPilotController = null;
+  public static Data registry = new Data();
 
   @Override
   public void start(Stage stage) throws Exception {

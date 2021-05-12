@@ -1,14 +1,15 @@
 package org.karimbkb.dao;
 
+import org.karimbkb.entity.KafkaConfig;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.karimbkb.entity.KafkaConfig;
 
 public class SQLite implements Database {
 
   @Override
-  public void createTable() {
+  public void createTable() throws SQLException {
     String sql =
         "CREATE TABLE IF NOT EXISTS config"
             + " (profile_name           VARCHAR(128)   NOT NULL,"
@@ -21,7 +22,7 @@ public class SQLite implements Database {
 
       pstmt.executeUpdate();
     } catch (Exception e) {
-      System.err.println(e.getMessage());
+      throw e;
     }
   }
 
@@ -30,7 +31,7 @@ public class SQLite implements Database {
   }
 
   @Override
-  public void insert(KafkaConfig kafkaConfig) {
+  public void insert(KafkaConfig kafkaConfig) throws SQLException {
     String sql = "INSERT INTO config (profile_name, bootstrap_server, group_id) VALUES (?, ?, ?);";
 
     try (Connection c = getConnection();
@@ -42,12 +43,12 @@ public class SQLite implements Database {
 
       pstmt.executeUpdate();
     } catch (Exception e) {
-      System.err.println(e.getMessage());
+      throw e;
     }
   }
 
   @Override
-  public KafkaConfig fetch(KafkaConfig kafkaConfig) {
+  public KafkaConfig fetch(KafkaConfig kafkaConfig) throws SQLException {
     String sql = "SELECT * FROM config WHERE profile_name = ?;";
 
     try (Connection c = getConnection();
@@ -59,13 +60,12 @@ public class SQLite implements Database {
       return new KafkaConfig(
           rs.getString("profile_name"), rs.getString("bootstrap_server"), rs.getString("group_id"));
     } catch (Exception e) {
-      System.err.println(e.getMessage());
+      throw e;
     }
-    return null;
   }
 
   @Override
-  public List<KafkaConfig> fetchAll() {
+  public List<KafkaConfig> fetchAll() throws SQLException {
     String sql = "SELECT * FROM config;";
     List<KafkaConfig> kafkaConfigList = new ArrayList<>();
 
@@ -84,13 +84,12 @@ public class SQLite implements Database {
 
       return kafkaConfigList;
     } catch (Exception e) {
-      System.err.println(e.getMessage());
+      throw e;
     }
-    return null;
   }
 
   @Override
-  public void update(KafkaConfig kafkaConfig) {
+  public void update(KafkaConfig kafkaConfig) throws SQLException {
     String sql =
         "UPDATE config set profile_name = ? , bootstrap_server = ?, group_id = ? WHERE profile_name = ?;";
 
@@ -103,12 +102,12 @@ public class SQLite implements Database {
       pstmt.setString(4, kafkaConfig.getProfileName());
       pstmt.executeUpdate();
     } catch (Exception e) {
-      System.err.println(e.getMessage());
+      throw e;
     }
   }
 
   @Override
-  public void delete(KafkaConfig kafkaConfig) {
+  public void delete(KafkaConfig kafkaConfig) throws SQLException {
     String sql = "DELETE FROM config WHERE profile_name = ?;";
 
     try (Connection c = getConnection();
@@ -117,7 +116,7 @@ public class SQLite implements Database {
       pstmt.setString(1, kafkaConfig.getProfileName());
       pstmt.executeQuery();
     } catch (Exception e) {
-      System.err.println(e.getMessage());
+      throw e;
     }
   }
 }

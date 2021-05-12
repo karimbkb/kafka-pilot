@@ -1,33 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.karimbkb.controller.KafkaManagementController">
-    <left>
-        <ListView fx:id="topicsListView" prefHeight="400.0" prefWidth="182.0" BorderPane.alignment="CENTER"/>
-    </left>
-    <center>
-        <TableView fx:id="messagesTableView" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="offset" editable="false" prefWidth="75.0" text="Offset">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="Offset"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="message" editable="false" prefWidth="75.0" text="Message">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="Message"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="timestamp" editable="false" prefWidth="75.0" text="Timestamp">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="Timestamp"/>
-                    </cellValueFactory>
-                </TableColumn>
-            </columns>
-        </TableView>
-    </center>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.karimbkb.controller.KafkaManagementController">
+   <center>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="messagesTableView" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="topic" editable="false" prefWidth="75.0" text="Topic">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="Topic" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="partition" editable="false" prefWidth="75.0" text="Partition">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="Partition" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="offset" editable="false" prefWidth="75.0" text="Offset">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="Offset" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="message" editable="false" prefWidth="75.0" text="Message">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="Message" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="timestamp" editable="false" prefWidth="75.0" text="Timestamp">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="Timestamp" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            <HBox alignment="CENTER" prefHeight="30.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of messages to show: " wrappingWidth="166.8544921875" />
+                  <TextField fx:id="numberOfMessages" onKeyReleased="#setMaxDisplayedMessage" prefWidth="100.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="produceMessageBtn" mnemonicParsing="false" onMouseClicked="#openProduceMessageWindow" prefWidth="120.0" text="Produce Message" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="progressBar" prefWidth="100.0" progress="0.0">
+               <HBox.margin>
+                  <Insets right="8.0" />
+               </HBox.margin>
+            </ProgressBar>
+            <Text fx:id="statusText" fill="#808080" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Pane maxHeight="30.0" prefHeight="0.0" HBox.hgrow="ALWAYS" />
+            <Text fx:id="topicText" fill="#7f7f7f" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <left>
+      <VBox>
+         <children>
+              <ListView fx:id="topicsListView" VBox.vgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#openCreateTopicWindow" text="Create Topic">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#deleteTopic" text="Delete Topic">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#reloadTopics" text="Reload" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>

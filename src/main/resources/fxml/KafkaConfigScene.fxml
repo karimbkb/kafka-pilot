@@ -29,7 +29,15 @@
       <VBox prefHeight="150.0" prefWidth="600.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <ListView fx:id="profileList" prefHeight="150.0" prefWidth="500.0" />
-            <Button fx:id="connect" mnemonicParsing="false" onMouseClicked="#connect" text="Connect" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+               <children>
+                  <Button fx:id="connect" mnemonicParsing="false" onMouseClicked="#connect" text="Connect" />
+                  <Button mnemonicParsing="false" onAction="#deleteProfile" onMouseClicked="#connect" text="Delete" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="50.0" right="50.0" top="10.0" />

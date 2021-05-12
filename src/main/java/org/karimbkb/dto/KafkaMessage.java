@@ -1,17 +1,38 @@
 package org.karimbkb.dto;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class KafkaMessage {
+  SimpleStringProperty topic;
+  SimpleIntegerProperty partition;
   SimpleLongProperty offset;
   SimpleStringProperty message;
   SimpleStringProperty timestamp;
 
-  public KafkaMessage(Long offset, String message, String timestamp) {
+  public KafkaMessage(String topic, int partition, Long offset, String message, String timestamp) {
+    this.topic = new SimpleStringProperty(topic);
+    this.partition = new SimpleIntegerProperty(partition);
     this.offset = new SimpleLongProperty(offset);
     this.message = new SimpleStringProperty(message);
     this.timestamp = new SimpleStringProperty(timestamp);
+  }
+
+  public String getTopic() {
+    return topic.get();
+  }
+
+  public void setTopic(String topic) {
+    this.topic.set(topic);
+  }
+
+  public int getPartition() {
+    return partition.get();
+  }
+
+  public void setPartition(int offset) {
+    this.partition.set(offset);
   }
 
   public Long getOffset() {

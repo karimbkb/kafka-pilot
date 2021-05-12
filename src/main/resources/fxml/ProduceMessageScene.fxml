@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.karimbkb.controller.ProduceMessageController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Topic" />
+            <ComboBox fx:id="topicComboBox" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Message" />
+            <TextArea fx:id="messageTextArea" onKeyPressed="#removeMessage" prefHeight="200.0" prefWidth="200.0" />
+            <HBox>
+               <children>
+                  <Pane disable="true" HBox.hgrow="ALWAYS" />
+                  <Text fx:id="infoText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="142.21630859375" />
+                  <Button fx:id="submitMessageBtn" alignment="TOP_LEFT" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#submitMessage" text="Submit" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>

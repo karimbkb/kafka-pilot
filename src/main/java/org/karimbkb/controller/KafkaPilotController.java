@@ -12,12 +12,10 @@ import javafx.scene.control.TabPane;
 import org.karimbkb.GuiceModule;
 import org.karimbkb.entity.KafkaConfig;
 
-import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@Singleton
 public class KafkaPilotController implements Initializable {
 
   @FXML private TabPane mainTabPane;
@@ -36,7 +34,7 @@ public class KafkaPilotController implements Initializable {
       fxmlLoader.setControllerFactory(injector::getInstance);
 
       Node node = fxmlLoader.load(getClass().getResourceAsStream("/fxml/KafkaConfigScene.fxml"));
-      mainTabPane.getTabs().add(new Tab("Tab 1", node));
+      mainTabPane.getTabs().add(new Tab("Tab " + mainTabPane.getTabs().size(), node));
       mainTabPane.getSelectionModel().select(mainTabPane.getTabs().size() - 1);
     }
   }

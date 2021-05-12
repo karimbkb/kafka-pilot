@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show last X messages" />
+            <TextField />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show last X messages" />
+            <TextField />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="40.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </Text>
+   </top>
+</BorderPane>
