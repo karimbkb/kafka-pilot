@@ -9,6 +9,7 @@ import lombok.NonNull;
 public class KafkaConfig {
   @NonNull private final String profileName;
   @NonNull private String bootstrapServer;
+  private String schemaRegistryUrl;
   @NonNull private String groupId;
 
   public KafkaConfig(@NonNull String profileName) {

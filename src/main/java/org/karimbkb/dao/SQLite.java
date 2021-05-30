@@ -14,6 +14,7 @@ public class SQLite implements Database {
         "CREATE TABLE IF NOT EXISTS config"
             + " (profile_name           VARCHAR(128)   NOT NULL,"
             + " bootstrap_server            VARCHAR(255)    NOT NULL,"
+            + " schema_registry_url        VARCHAR(255)    NOT NULL,"
             + " group_id        VARCHAR(64) NOT NULL,"
             + " PRIMARY KEY (profile_name));";
 
@@ -21,8 +22,6 @@ public class SQLite implements Database {
         PreparedStatement pstmt = c.prepareStatement(sql)) {
 
       pstmt.executeUpdate();
-    } catch (Exception e) {
-      throw e;
     }
   }
 
@@ -32,18 +31,18 @@ public class SQLite implements Database {
 
   @Override
   public void insert(KafkaConfig kafkaConfig) throws SQLException {
-    String sql = "INSERT INTO config (profile_name, bootstrap_server, group_id) VALUES (?, ?, ?);";
+    String sql =
+        "INSERT INTO config (profile_name, bootstrap_server, schema_registry_url, group_id) VALUES (?, ?, ?, ?);";
 
     try (Connection c = getConnection();
         PreparedStatement pstmt = c.prepareStatement(sql)) {
 
       pstmt.setString(1, kafkaConfig.getProfileName());
       pstmt.setString(2, kafkaConfig.getBootstrapServer());
-      pstmt.setString(3, kafkaConfig.getGroupId());
+      pstmt.setString(3, kafkaConfig.getSchemaRegistryUrl());
+      pstmt.setString(4, kafkaConfig.getGroupId());
 
       pstmt.executeUpdate();
-    } catch (Exception e) {
-      throw e;
     }
   }
 
@@ -58,9 +57,10 @@ public class SQLite implements Database {
 
       ResultSet rs = pstmt.executeQuery();
       return new KafkaConfig(
-          rs.getString("profile_name"), rs.getString("bootstrap_server"), rs.getString("group_id"));
-    } catch (Exception e) {
-      throw e;
+          rs.getString("profile_name"),
+          rs.getString("bootstrap_server"),
+          rs.getString("schema_registry_url"),
+          rs.getString("group_id"));
     }
   }
 
@@ -78,31 +78,29 @@ public class SQLite implements Database {
             new KafkaConfig(
                 rs.getString("profile_name"),
                 rs.getString("bootstrap_server"),
+                rs.getString("schema_registry_url"),
                 rs.getString("group_id")));
       }
       rs.close();
 
       return kafkaConfigList;
-    } catch (Exception e) {
-      throw e;
     }
   }
 
   @Override
   public void update(KafkaConfig kafkaConfig) throws SQLException {
     String sql =
-        "UPDATE config set profile_name = ? , bootstrap_server = ?, group_id = ? WHERE profile_name = ?;";
+        "UPDATE config set profile_name = ? , bootstrap_server = ?, schema_registry_url = ?, group_id = ? WHERE profile_name = ?;";
 
     try (Connection c = getConnection();
         PreparedStatement pstmt = c.prepareStatement(sql)) {
 
       pstmt.setString(1, kafkaConfig.getProfileName());
       pstmt.setString(2, kafkaConfig.getBootstrapServer());
-      pstmt.setString(3, kafkaConfig.getGroupId());
-      pstmt.setString(4, kafkaConfig.getProfileName());
+      pstmt.setString(3, kafkaConfig.getSchemaRegistryUrl());
+      pstmt.setString(4, kafkaConfig.getGroupId());
+      pstmt.setString(5, kafkaConfig.getProfileName());
       pstmt.executeUpdate();
-    } catch (Exception e) {
-      throw e;
     }
   }
 
@@ -115,8 +113,6 @@ public class SQLite implements Database {
 
       pstmt.setString(1, kafkaConfig.getProfileName());
       pstmt.executeQuery();
-    } catch (Exception e) {
-      throw e;
     }
   }
 }

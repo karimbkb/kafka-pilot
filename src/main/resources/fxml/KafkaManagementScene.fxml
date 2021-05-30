@@ -16,27 +16,27 @@
          <children>
             <TableView fx:id="messagesTableView" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="topic" editable="false" prefWidth="75.0" text="Topic">
+                  <TableColumn fx:id="topic" editable="false" prefWidth="100.0" text="Topic">
                      <cellValueFactory>
                         <PropertyValueFactory property="Topic" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="partition" editable="false" prefWidth="75.0" text="Partition">
+                  <TableColumn fx:id="partition" editable="false" prefWidth="70.0" text="Partition">
                      <cellValueFactory>
                         <PropertyValueFactory property="Partition" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="offset" editable="false" prefWidth="75.0" text="Offset">
+                  <TableColumn fx:id="offset" editable="false" prefWidth="69.0" text="Offset">
                      <cellValueFactory>
                         <PropertyValueFactory property="Offset" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="message" editable="false" prefWidth="75.0" text="Message">
+                  <TableColumn fx:id="message" editable="false" prefWidth="228.0" text="Message">
                      <cellValueFactory>
                         <PropertyValueFactory property="Message" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="timestamp" editable="false" prefWidth="75.0" text="Timestamp">
+                  <TableColumn fx:id="timestamp" editable="false" prefWidth="90.0" text="Timestamp">
                      <cellValueFactory>
                         <PropertyValueFactory property="Timestamp" />
                      </cellValueFactory>

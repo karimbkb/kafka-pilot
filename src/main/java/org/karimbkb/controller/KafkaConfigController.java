@@ -23,6 +23,7 @@ public class KafkaConfigController implements Initializable {
 
   @FXML private TextField profileName;
   @FXML private TextField bootstrapServer;
+  @FXML private TextField schemaRegistryUrl;
   @FXML private TextField kafkaGroupId;
   @FXML private ListView<String> profileList;
 
@@ -42,10 +43,10 @@ public class KafkaConfigController implements Initializable {
     try {
       kafkaConfigCollection = db.fetchAll();
     } catch (SQLException e) {
-      Notification.createExceptionAlert("Error", "Initialize profiles failed", e).showAndWait();
+      Notification.createExceptionAlert("Error", "Initializing profiles failed", e).showAndWait();
+      return;
     }
 
-    assert kafkaConfigCollection != null;
     for (KafkaConfig kafkaConfig : kafkaConfigCollection) {
       profileList.getItems().add(kafkaConfig.getProfileName());
     }
@@ -65,12 +66,17 @@ public class KafkaConfigController implements Initializable {
   @FXML
   private void saveConfigAndConnect() throws IOException {
     KafkaConfig kafkaConfig =
-        new KafkaConfig(profileName.getText(), bootstrapServer.getText(), kafkaGroupId.getText());
+        new KafkaConfig(
+            profileName.getText(),
+            bootstrapServer.getText(),
+            schemaRegistryUrl.getText(),
+            kafkaGroupId.getText());
     try {
       db.createTable();
       db.insert(kafkaConfig);
     } catch (SQLException e) {
       Notification.createExceptionAlert("Error", "Save config and connect failed", e).showAndWait();
+      return;
     }
 
     KafkaPilot.kafkaPilotController.switchToKafkaManagementView(kafkaConfig);
@@ -78,15 +84,23 @@ public class KafkaConfigController implements Initializable {
 
   @FXML
   private void connect() throws IOException {
+    KafkaConfig kafkaConfig;
     String selectedProfile = profileList.getSelectionModel().getSelectedItem();
-    KafkaConfig kafkaConfig = null;
+
+    if (selectedProfile == null) {
+      Notification.createAlert(
+              "Error", "No Selection", "Please select a profile first.")
+          .showAndWait();
+      return;
+    }
+
     try {
       kafkaConfig = db.fetch(new KafkaConfig(selectedProfile));
     } catch (SQLException e) {
       Notification.createExceptionAlert("Error", "Connecting to database failed", e).showAndWait();
+      return;
     }
 
-    assert kafkaConfig != null;
     KafkaPilot.kafkaPilotController.switchToKafkaManagementView(kafkaConfig);
   }
 
@@ -97,7 +111,7 @@ public class KafkaConfigController implements Initializable {
       db.delete(new KafkaConfig(selectedProfile));
       profileList.getItems().removeAll(selectedProfile);
     } catch (SQLException e) {
-      Notification.createExceptionAlert("Error", "Deleting topic failed", e).showAndWait();
+      Notification.createExceptionAlert("Error", "Deleting profile failed", e).showAndWait();
     }
   }
 }

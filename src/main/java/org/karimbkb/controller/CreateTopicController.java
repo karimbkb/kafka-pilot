@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
-import org.karimbkb.model.KafkaManagement;
 import org.karimbkb.model.Notification;
 import org.karimbkb.model.Util;
 
@@ -19,8 +18,8 @@ import java.util.ResourceBundle;
 
 public class CreateTopicController implements Initializable {
 
-  private final KafkaManagement kafkaManagement;
   private final Util util;
+  private KafkaManagementController kafkaManagementController;
 
   @FXML private TextField topicName;
   @FXML private TextField replicationFactor;
@@ -28,8 +27,7 @@ public class CreateTopicController implements Initializable {
   @FXML private Button saveTopicBtn;
 
   @Inject
-  public CreateTopicController(KafkaManagement kafkaManagement, Util util) {
-    this.kafkaManagement = kafkaManagement;
+  public CreateTopicController(Util util) {
     this.util = util;
   }
 
@@ -48,10 +46,15 @@ public class CreateTopicController implements Initializable {
               Short.parseShort(replicationFactor.getText()));
 
       adminClient.createTopics(Collections.singleton(newTopic));
+      kafkaManagementController.loadKafkaTopics();
       Stage stage = (Stage) saveTopicBtn.getScene().getWindow();
       stage.close();
     } catch (NumberFormatException e) {
       Notification.createExceptionAlert("Error", "Saving topic failed", e).showAndWait();
     }
+  }
+
+  public void setKafkaManagementController(KafkaManagementController kafkaManagementController) {
+    this.kafkaManagementController = kafkaManagementController;
   }
 }

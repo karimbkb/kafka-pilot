@@ -1,9 +1,8 @@
 package org.karimbkb.dao;
 
-import org.karimbkb.entity.KafkaConfig;
-
 import java.sql.SQLException;
 import java.util.List;
+import org.karimbkb.entity.KafkaConfig;
 
 public interface Database {
   void createTable() throws SQLException;

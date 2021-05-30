@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Menu;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import org.karimbkb.GuiceModule;
@@ -19,8 +18,6 @@ import java.util.ResourceBundle;
 public class KafkaPilotController implements Initializable {
 
   @FXML private TabPane mainTabPane;
-
-  @FXML private Menu mainMenu;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {}

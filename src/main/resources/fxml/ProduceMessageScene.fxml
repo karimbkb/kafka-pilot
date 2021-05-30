@@ -11,7 +11,14 @@
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Topic" />
-            <ComboBox fx:id="topicComboBox" />
+            <ComboBox fx:id="topicComboBox" VBox.vgrow="ALWAYS" />
+            <CheckBox fx:id="produceAvroCheckbox" mnemonicParsing="false" onAction="#setFieldStatus" text="Produce Avro Message:" />
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+               <children>
+                  <TextField fx:id="filePathTextField" disable="true" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="openFilePickerBtn" disable="true" mnemonicParsing="false" onAction="#openFilePicker" text="Open" />
+               </children>
+            </HBox>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Message" />
             <TextArea fx:id="messageTextArea" onKeyPressed="#removeMessage" prefHeight="200.0" prefWidth="200.0" />
             <HBox>

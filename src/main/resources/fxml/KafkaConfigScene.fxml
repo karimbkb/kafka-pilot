@@ -8,14 +8,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.karimbkb.controller.KafkaConfigController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.karimbkb.controller.KafkaConfigController">
    <center>
       <VBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add New Profile">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile name" />
             <TextField fx:id="profileName" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bootstrap Server" />
             <TextField fx:id="bootstrapServer" promptText="localhost:9092,localhost:9093,localhost:9094" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Schema Registry Url" />
+            <TextField fx:id="schemaRegistryUrl" promptText="http://localhost:8081" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Group ID config" />
             <TextField fx:id="kafkaGroupId" promptText="kafka-group-id" />
             <Button fx:id="saveConfigAndConnect" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#saveConfigAndConnect" text="Save &amp; Connect" />
@@ -28,7 +38,12 @@
    <bottom>
       <VBox prefHeight="150.0" prefWidth="600.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="profileList" prefHeight="150.0" prefWidth="500.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Existing Profiles">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <ListView fx:id="profileList" prefHeight="200.0" prefWidth="500.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                <children>
                   <Button fx:id="connect" mnemonicParsing="false" onMouseClicked="#connect" text="Connect" />
@@ -40,7 +55,7 @@
             </HBox>
          </children>
          <padding>
-            <Insets bottom="20.0" left="50.0" right="50.0" top="10.0" />
+            <Insets bottom="20.0" left="50.0" right="50.0" />
          </padding>
       </VBox>
    </bottom>
