@@ -207,12 +207,14 @@ public class KafkaManagementController implements Initializable {
                   Map<String, List<PartitionInfo>> topics;
                   try {
                     topics = consumer.loadKafkaTopics();
-                    topicsListView.getItems().clear();
-                    topicsListView.getItems().addAll(new ArrayList<>(topics.keySet()));
                   } catch (Exception e) {
                     Notification.createExceptionAlert("Error", "Loading Kafka Topics failed", e)
                         .showAndWait();
+                    return;
                   }
+
+                  topicsListView.getItems().clear();
+                  topicsListView.getItems().addAll(new ArrayList<>(topics.keySet()));
                 }));
   }
 }

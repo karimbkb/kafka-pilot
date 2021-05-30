@@ -61,7 +61,7 @@ public class Reader implements Consumer {
               consumer.seekToBeginning(Collections.singleton(topicPartition));
             }
 
-            ConsumerRecords<Long, String> records = consumer.poll(100);
+            ConsumerRecords<Long, String> records = consumer.poll(1000);
             for (ConsumerRecord<Long, String> record : records)
               kafkaMessages.add(
                   new KafkaMessage(
