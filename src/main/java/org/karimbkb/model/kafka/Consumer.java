@@ -6,6 +6,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.karimbkb.controller.KafkaManagementController;
 import org.karimbkb.dto.KafkaMessage;
 import org.karimbkb.entity.KafkaConfig;
 
@@ -16,8 +17,9 @@ import java.util.Properties;
 
 public interface Consumer {
   Map<String, List<PartitionInfo>> loadKafkaTopics() throws SQLException;
-
   List<KafkaMessage> loadMessagesByTopic(String topic) throws SQLException;
+  void setKafkaManagementController(KafkaManagementController kafkaManagementController);
+  KafkaManagementController getKafkaManagementController();
 
   default Properties getProperties(KafkaConfig kafkaConfig) {
     Properties props = new Properties();

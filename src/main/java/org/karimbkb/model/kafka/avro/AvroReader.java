@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 public class AvroReader implements Consumer {
   private final Common common;
+  private KafkaManagementController kafkaManagementController;
 
   @Inject
   public AvroReader(Common common) {
@@ -64,6 +65,8 @@ public class AvroReader implements Consumer {
             }
 
             ConsumerRecords<Long, GenericRecord> records = consumer.poll(100);
+            getKafkaManagementController().getProgressBar().setProgress((float) topicPartition.partition() / topicPartitions.size());
+
             for (ConsumerRecord<Long, GenericRecord> record : records)
               kafkaMessages.add(
                   new KafkaMessage(
@@ -77,6 +80,15 @@ public class AvroReader implements Consumer {
       return kafkaMessages;
     }
   }
+
+  public void setKafkaManagementController(KafkaManagementController kafkaManagementController) {
+    this.kafkaManagementController = kafkaManagementController;
+  }
+
+  public KafkaManagementController getKafkaManagementController() {
+    return kafkaManagementController;
+  }
+
 
   private long calcOffset(
       KafkaConsumer<Long, GenericRecord> consumer, List<TopicPartition> topicPartitions, int setOffset) {

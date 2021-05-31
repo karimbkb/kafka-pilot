@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class Reader implements Consumer {
 
   private final KafkaCommon common;
+  private KafkaManagementController kafkaManagementController;
 
   @Inject
   public Reader(KafkaCommon common) {
@@ -62,6 +63,8 @@ public class Reader implements Consumer {
             }
 
             ConsumerRecords<Long, String> records = consumer.poll(1000);
+            getKafkaManagementController().getProgressBar().setProgress((float) topicPartition.partition() / topicPartitions.size());
+
             for (ConsumerRecord<Long, String> record : records)
               kafkaMessages.add(
                   new KafkaMessage(
@@ -74,6 +77,14 @@ public class Reader implements Consumer {
 
       return kafkaMessages;
     }
+  }
+
+  public void setKafkaManagementController(KafkaManagementController kafkaManagementController) {
+    this.kafkaManagementController = kafkaManagementController;
+  }
+
+  public KafkaManagementController getKafkaManagementController() {
+    return kafkaManagementController;
   }
 
   private long calcOffset(

@@ -98,6 +98,7 @@ public class KafkaManagementController implements Initializable {
     List<KafkaMessage> kafkaMessages;
     try {
       consumer = consumerFactory.get(selectedTopic);
+      consumer.setKafkaManagementController(this);
       kafkaMessages = consumer.loadMessagesByTopic(selectedTopic);
 
       messagesTableView.getItems().clear();
@@ -119,6 +120,10 @@ public class KafkaManagementController implements Initializable {
     } catch (URISyntaxException e) {
       Notification.createExceptionAlert("Error", "Schema url was wrong.", e).showAndWait();
     }
+  }
+
+  public ProgressIndicator getProgressBar() {
+    return progressBar;
   }
 
   @FXML
