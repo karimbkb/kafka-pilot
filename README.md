@@ -44,6 +44,11 @@
 
 <img src="https://drive.google.com/uc?export=download&id=1sp9LlmXwVeCz3dwIFI2knjhtWZx0EVKY" width="800" />
 
+### Error handling with stacktraces
+
+<img src="https://drive.google.com/uc?export=download&id=1c2SaaMSghgkp71eMbqL6kGPEd8u-PZtJ" width="800" />
+
+
 ### Produce Standard Messages
 
 <img src="https://drive.google.com/uc?export=download&id=1y-zUL4V888pQCO9tw_y5Oppd6jm82-Cf" width="800" />
