@@ -26,7 +26,7 @@
 - [x] Improve error handling with stacktraces
 - [ ] Live consume of messages for topic
 - [ ] Menu in TableView to copy and view messages in a separate window
-- [ ] Schema Manager to read schemas versions
+- [ ] Schema Manager to read schema versions
 - [ ] Schema Manager to add new schemas
 - [ ] Add JPackage to create executables
 

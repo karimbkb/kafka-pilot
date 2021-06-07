@@ -56,14 +56,16 @@ public class Reader implements Consumer {
       topicPartitions.forEach(
           topicPartition -> {
             consumer.assign(Collections.singleton(topicPartition));
-            if(endOffsets > 0) {
+            if (endOffsets > 0) {
               consumer.seek(topicPartition, endOffsets);
             } else {
               consumer.seekToBeginning(Collections.singleton(topicPartition));
             }
 
             ConsumerRecords<Long, String> records = consumer.poll(1000);
-            getKafkaManagementController().getProgressBar().setProgress((float) topicPartition.partition() / topicPartitions.size());
+            getKafkaManagementController()
+                .getProgressBar()
+                .setProgress((float) topicPartition.partition() / topicPartitions.size());
 
             for (ConsumerRecord<Long, String> record : records)
               kafkaMessages.add(
@@ -89,6 +91,10 @@ public class Reader implements Consumer {
 
   private long calcOffset(
       KafkaConsumer<Long, String> consumer, List<TopicPartition> topicPartitions, int setOffset) {
+    if (consumer.endOffsets(topicPartitions).entrySet().stream().findFirst().isEmpty()) {
+      return 100L;
+    }
+
     return Math.max(
         consumer.endOffsets(topicPartitions).entrySet().stream().findFirst().get().getValue()
             - Integer.toUnsignedLong(setOffset),

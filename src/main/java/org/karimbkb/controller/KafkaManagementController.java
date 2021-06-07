@@ -37,9 +37,7 @@ public class KafkaManagementController implements Initializable {
   public static final String MAX_DISPLAY_MESSAGES = "max_display_messages";
   public static final String CURRENT_TOPIC = "current_topic";
 
-  private final Producer producer;
   private Consumer consumer;
-  private final AvroProducer avroProducer;
   private final ConsumerFactory consumerFactory;
   private final Util util;
   private final ThreadPoolExecutor executor =
@@ -60,9 +58,7 @@ public class KafkaManagementController implements Initializable {
       AvroProducer avroProducer,
       ConsumerFactory consumerFactory,
       Util util) {
-    this.producer = producer;
     this.consumer = consumer;
-    this.avroProducer = avroProducer;
     this.consumerFactory = consumerFactory;
     this.util = util;
   }
@@ -87,9 +83,7 @@ public class KafkaManagementController implements Initializable {
             messagesTableView.getItems().clear();
 
             executor.submit(
-                () -> {
-                  loadKafkaMessages(selectedTopic);
-                });
+                () -> loadKafkaMessages(selectedTopic));
           }
         });
   }
@@ -117,8 +111,6 @@ public class KafkaManagementController implements Initializable {
       Notification.createExceptionAlert("Error", "Thread issue led to exception.", e).showAndWait();
     } catch (SQLException e) {
       Notification.createExceptionAlert("Error", "Could not read the database.", e).showAndWait();
-    } catch (URISyntaxException e) {
-      Notification.createExceptionAlert("Error", "Schema url was wrong.", e).showAndWait();
     }
   }
 
@@ -137,6 +129,7 @@ public class KafkaManagementController implements Initializable {
     produceMessageController.setKafkaManagementController(this);
 
     Stage stage = new Stage();
+    stage.setTitle("Produce Message");
     stage.setScene(new Scene(produceMessageRoot));
     stage.show();
   }
@@ -152,6 +145,7 @@ public class KafkaManagementController implements Initializable {
     createTopicController.setKafkaManagementController(this);
 
     Stage stage = new Stage();
+    stage.setTitle("Create Topic");
     stage.setScene(new Scene(createTopicRoot));
     stage.show();
   }

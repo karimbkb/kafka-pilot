@@ -22,7 +22,7 @@ public class Factory implements ConsumerFactory {
   }
 
   public Consumer get(String topic)
-      throws SQLException, IOException, URISyntaxException, InterruptedException {
+      throws SQLException, IOException, InterruptedException {
     if (schemaHandler.getAllVersions(topic) != null) {
       return new AvroReader(common);
     } else {

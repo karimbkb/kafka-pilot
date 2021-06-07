@@ -39,7 +39,7 @@ public class KafkaConfigController implements Initializable {
   }
 
   private void initProfileList() {
-    List<KafkaConfig> kafkaConfigCollection = null;
+    List<KafkaConfig> kafkaConfigCollection;
     try {
       kafkaConfigCollection = db.fetchAll();
     } catch (SQLException e) {

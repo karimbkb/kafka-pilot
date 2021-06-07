@@ -15,6 +15,8 @@ import java.util.List;
 
 public class SchemaRegistry implements SchemaHandler {
 
+  public static final String VALUE_VERSIONS_PATH = "-value/versions/";
+  public static final String SUBJECTS_PATH = "/subjects/";
   private final KafkaCommon common;
 
   @Inject
@@ -29,7 +31,8 @@ public class SchemaRegistry implements SchemaHandler {
     HttpClient httpClient = HttpClient.newHttpClient();
 
     final HttpRequest request =
-        HttpRequest.newBuilder(URI.create(kafkaConfig.getSchemaRegistryUrl() + getVersionsPath(topic)))
+        HttpRequest.newBuilder(
+                URI.create(kafkaConfig.getSchemaRegistryUrl() + getVersionsPath(topic)))
             .header("accept", "application/json")
             .build();
 
@@ -44,11 +47,14 @@ public class SchemaRegistry implements SchemaHandler {
   }
 
   @Override
-  public void getSchemaByVersion(int version) throws IOException, InterruptedException {
+  // TODO: define method
+  public void getSchemaByVersion(String topic, int version) throws IOException, InterruptedException, SQLException {
     HttpClient httpClient = HttpClient.newHttpClient();
+    KafkaConfig kafkaConfig = common.getCurrentKafkaConfig();
 
     final HttpRequest request =
-        HttpRequest.newBuilder(URI.create("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"))
+        HttpRequest.newBuilder(
+                URI.create(kafkaConfig.getSchemaRegistryUrl() + getVersionsPath(topic)))
             .header("accept", "application/json")
             .build();
 
@@ -59,10 +65,10 @@ public class SchemaRegistry implements SchemaHandler {
   }
 
   private String getVersionsPath(String currentTopic) {
-    return "/subjects/" + currentTopic + "-value/versions";
+    return SUBJECTS_PATH + currentTopic + VALUE_VERSIONS_PATH;
   }
 
   private String getSchemaPath(String currentTopic, int version) {
-    return "/subjects/" + currentTopic + "-value/versions/" + version;
+    return SUBJECTS_PATH + currentTopic + VALUE_VERSIONS_PATH + version;
   }
 }

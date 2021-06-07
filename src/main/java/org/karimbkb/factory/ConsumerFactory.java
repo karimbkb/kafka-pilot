@@ -7,6 +7,6 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 public interface ConsumerFactory {
-    public Consumer get(String selectedTopic)
-            throws SQLException, IOException, URISyntaxException, InterruptedException;
+    Consumer get(String selectedTopic)
+            throws SQLException, IOException, InterruptedException;
 }

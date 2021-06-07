@@ -4,12 +4,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+@SuppressWarnings("unused")
 public class KafkaMessage {
-  SimpleStringProperty topic;
-  SimpleIntegerProperty partition;
-  SimpleLongProperty offset;
-  SimpleStringProperty message;
-  SimpleStringProperty timestamp;
+  final SimpleStringProperty topic;
+  final SimpleIntegerProperty partition;
+  final SimpleLongProperty offset;
+  final SimpleStringProperty message;
+  final SimpleStringProperty timestamp;
 
   public KafkaMessage(String topic, int partition, Long offset, String message, String timestamp) {
     this.topic = new SimpleStringProperty(topic);

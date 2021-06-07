@@ -3,9 +3,6 @@ package org.karimbkb.controller;
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -17,7 +14,6 @@ import org.karimbkb.model.kafka.Consumer;
 import org.karimbkb.model.kafka.Producer;
 import org.karimbkb.model.kafka.avro.AvroProducer;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -30,12 +26,9 @@ import java.util.ResourceBundle;
 public class ProduceMessageController implements Initializable {
 
   private final FileChooser fileChooser = new FileChooser();
-  private Desktop desktop = Desktop.getDesktop();
-
   private final Producer producer;
   private final Consumer consumer;
   private final AvroProducer avroProducer;
-
   private KafkaManagementController kafkaManagementController;
 
   @FXML private ComboBox<String> topicComboBox;
@@ -56,7 +49,7 @@ public class ProduceMessageController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    Map<String, List<PartitionInfo>> topics = null;
+    Map<String, List<PartitionInfo>> topics;
     try {
       topics = consumer.loadKafkaTopics();
     } catch (SQLException e) {

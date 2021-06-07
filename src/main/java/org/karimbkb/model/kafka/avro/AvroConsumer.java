@@ -7,12 +7,11 @@ import org.apache.kafka.common.serialization.LongDeserializer;
 import org.karimbkb.dto.KafkaMessage;
 import org.karimbkb.entity.KafkaConfig;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
 public interface AvroConsumer {
-    List<KafkaMessage> loadMessagesByTopic(String topic) throws SQLException;
+    List<KafkaMessage> loadMessagesByTopic(String topic);
 
     default Properties getAvroConsumerProperties(KafkaConfig kafkaConfig) {
         Properties props = new Properties();

@@ -13,7 +13,7 @@ import org.karimbkb.model.Data;
 public class KafkaPilot extends Application {
 
   public static KafkaPilotController kafkaPilotController = null;
-  public static Data registry = new Data();
+  public static final Data registry = new Data();
 
   @Override
   public void start(Stage stage) throws Exception {

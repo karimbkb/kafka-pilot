@@ -25,13 +25,11 @@ import java.util.Scanner;
 
 public class AvroWriter implements AvroProducer {
   private final KafkaCommon common;
-  private final SchemaHandler schemaHandler;
 
-  @Inject
+    @Inject
   public AvroWriter(KafkaCommon common, SchemaHandler schemaHandler) {
     this.common = common;
-    this.schemaHandler = schemaHandler;
-  }
+    }
 
   @Override
   public void produceAvroMessage(String topic, String message, String schemaStr)
