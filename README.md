@@ -13,6 +13,7 @@
 
 - Java 11
 - JavaFX 11
+- Google Guice 5.0
 - Gradle 6.7
 
 ## Roadmap
